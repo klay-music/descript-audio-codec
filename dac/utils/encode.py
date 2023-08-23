@@ -97,7 +97,7 @@ def process(
         signal_from_batch.to(device)
         codes = generator.encode(
             signal_from_batch.audio_data, signal_from_batch.sample_rate, **kwargs
-        )["codes"].cpu()
+        )["codes"].detach().cpu()
         codebook_indices.append(codes)
 
     codebook_indices = torch.cat(codebook_indices, dim=0)
